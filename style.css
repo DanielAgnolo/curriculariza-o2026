@@ -135,3 +135,118 @@ form .btn-iniciar {
 .pagina-info .container{
     background: transparent;
 }
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-indice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.card-indice h2{
+    font-size: 20px;
+    color: #F58442;
+    font-weight: semi-bold;
+}
+
+.container-indice{
+    width: 573px;
+    height: 28px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 8px;
+}
+
+.indice{
+    background-color:#F58442;
+    width: 100px;
+    height: 26px;
+    border-radius: 8px;
+    border-color: #BA4500;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.card-pergunta{
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    border-width: 2px;
+    border-color: #0000004D;
+    border-style: solid;
+    width: fit-content;
+}
+
+.card-pergunta h2{
+    font-size: 20px;
+    color :#000000B3;
+    font-weight:500;
+}
+
+.card-alternativa{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+}
+
+.card-alternativa img{
+    width: 297px;
+    height: 165px;
+    padding: 10px 20px 10px 20px;
+}
+
+.btn-alternativaA{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 36px;
+    background-color: #99b7f5;
+    border: none;
+    border-radius: 8px;
+    color: #2B885C;
+    font-weight: 500;
+}
+
+.btn-alternativaB{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 36px;
+    background-color: #F58442;
+    border: none;
+    border-radius: 8px;
+    color: #FCCA59;
+    font-weight: 500;
+}
+
+.btn-alternativaC{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 36px;
+    background-color: #F296Bd;
+    border: none;
+    border-radius: 8px;
+    color: #FCCA59;
+    font-weight: 500;
+}
+
+.btn-alternativaD{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 36px;
+    background-color: #FCCA59;
+    border: none;
+    border-radius: 8px;
+    color: #F58442;
+    font-weight: 500;
+}
