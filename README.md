@@ -57,14 +57,14 @@ curriculariza-o2026/
 
 ## Funcionalidades
 
-- ✅ Tela inicial com logo e botão de início
-- ✅ Formulário de cadastro do jogador (nome, escola, idade)
-- ✅ 15 perguntas com 4 alternativas cada, com imagens ilustrativas
-- ✅ Feedback imediato de acerto ou erro após cada resposta
-- ✅ Barra de progresso animada
-- ✅ Navegação entre perguntas (Anterior / Próximo)
-- ✅ Tela de resultado final com pontuação e mensagem personalizada
-- ✅ Layout responsivo (funciona em celular e computador)
+-  Tela inicial com logo e botão de início
+-  Formulário de cadastro do jogador (nome, escola, idade)
+-  15 perguntas com 4 alternativas cada, com imagens ilustrativas
+-  Feedback imediato de acerto ou erro após cada resposta
+-  Barra de progresso animada
+-  Navegação entre perguntas (Anterior / Próximo)
+-  Tela de resultado final com pontuação e mensagem personalizada
+-  Layout responsivo (funciona em celular e computador)
 
 ---
 
