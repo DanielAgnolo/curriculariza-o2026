@@ -1,1 +1,0 @@
-# curriculariza-o2026

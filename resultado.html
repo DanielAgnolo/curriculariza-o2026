@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BruQuiz - Resultado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="pagina-info">
+    <div class="container">
+        <div class="card card-resultado">
+
+            <div class="emoji-resultado" id="emoji-resultado">🏆</div>
+
+            <h2 class="titulo-info" id="titulo-resultado">Parabéns!</h2>
+
+            <div class="placar">
+                <span id="texto-placar">Você acertou 0 de 15</span>
+            </div>
+
+            <p class="mensagem-resultado" id="mensagem-resultado"></p>
+
+            <div class="info-jogador" id="info-jogador"></div>
+
+            <div class="botoes-resultado">
+                <a href="jogo.html">
+                    <button class="btn-iniciar btn-secundario">🔄 Jogar de novo</button>
+                </a>
+                <a href="index.html">
+                    <button class="btn-iniciar">🏠 Início</button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const acertos = parseInt(localStorage.getItem("acertos") || "0");
+        const total = parseInt(localStorage.getItem("total") || "15");
+        const nome = localStorage.getItem("nomeJogador") || "Jogador";
+        const escola = localStorage.getItem("escolaJogador") || "";
+
+        const porcentagem = (acertos / total) * 100;
+
+        document.getElementById("texto-placar").textContent = `Você acertou ${acertos} de ${total}`;
+
+        // Info do jogador
+        document.getElementById("info-jogador").innerHTML = `
+            <p>👤 <strong>${nome}</strong></p>
+            ${escola ? `<p>🏫 ${escola}</p>` : ""}
+        `;
+
+        // Mensagem e emoji conforme desempenho
+        const emoji = document.getElementById("emoji-resultado");
+        const titulo = document.getElementById("titulo-resultado");
+        const mensagem = document.getElementById("mensagem-resultado");
+
+        if (porcentagem === 100) {
+            emoji.textContent = "🏆";
+            titulo.textContent = "Perfeito!";
+            mensagem.textContent = "Você acertou tudo! É um verdadeiro especialista em Brusque!";
+        } else if (porcentagem >= 70) {
+            emoji.textContent = "😄";
+            titulo.textContent = "Muito bem!";
+            mensagem.textContent = "Ótimo resultado! Você conhece bastante sobre Brusque!";
+        } else if (porcentagem >= 40) {
+            emoji.textContent = "🙂";
+            titulo.textContent = "Bom trabalho!";
+            mensagem.textContent = "Você está aprendendo bastante sobre a nossa cidade!";
+        } else {
+            emoji.textContent = "📚";
+            titulo.textContent = "Continue estudando!";
+            mensagem.textContent = "Que tal explorar mais sobre Brusque e tentar de novo?";
+        }
+    </script>
+</body>
+</html>

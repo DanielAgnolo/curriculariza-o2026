@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BruQuiz</title>
-    <!-- Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="index.html">
 </head>
-
 <body class="pagina-info">
-
     <div class="container">
-
         <div class="card">
-
             <h2 class="titulo-info">
                 Antes de começar a jogar,<br>
                 preencha seus dados
             </h2>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input id="nome" type="text" placeholder="Digite seu nome...">
 
-            <form>
+                <label for="escola">Escola:</label>
+                <input id="escola" type="text" placeholder="Nome da sua escola...">
 
-                <label>Nome:</label>
-                <input id="nome" type="text" placeholder="Responda aqui seu nome...">
+                <label for="idade">Idade:</label>
+                <input id="idade" type="number" placeholder="Sua idade..." min="1" max="99">
 
-                <label>Escola</label>
-                <input id="escola" type="text" placeholder="Coloque aqui o nome da sua Escola...">
-
-                <label>Idade</label>
-                <input id="idade" type="number" placeholder="Coloque sua idade...">
-
-                <button type="button" class="btn-iniciar">
+                <button class="btn-iniciar" onclick="irParaJogo()">
                     Ir para o Jogo
                 </button>
-
-            </form>
-
+            </div>
         </div>
-
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        function irParaJogo() {
+            const nome = document.getElementById("nome").value.trim();
+            const escola = document.getElementById("escola").value.trim();
+            const idade = document.getElementById("idade").value.trim();
+
+            if (nome === "" || escola === "" || idade === "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            // Salva os dados para usar na tela de resultado
+            localStorage.setItem("nomeJogador", nome);
+            localStorage.setItem("escolaJogador", escola);
+            localStorage.setItem("idadeJogador", idade);
+
+            window.location.href = "jogo.html";
+        }
+    </script>
 </body>
+</html>

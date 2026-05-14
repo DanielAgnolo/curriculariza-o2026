@@ -3,250 +3,438 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
     font-style: normal;
 }
 
 body {
     width: 100%;
-    height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
 }
 
-/* container ocupa a tela inteira */
+/* ==================== TELA INICIAL ==================== */
 
 .container {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background: #2B885C;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     text-align: center;
 }
 
-/* título */
-
 .titulo {
     padding: 0 0 20px 0;
-    
 }
 
-.s {
-    color: red;
+.titulo img {
+    max-width: 300px;
+    width: 80%;
 }
 
-.i {
-    color: #ffd166;
-}
-
-/* botão */
+/* ==================== BOTÃO INICIAR ==================== */
 
 .btn-iniciar {
     background: #e6be59;
     border: none;
-
     padding: 15px 40px;
-
     font-size: clamp(18px, 3vw, 26px);
-
+    font-weight: 700;
     border-radius: 10px;
-
     cursor: pointer;
-
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-
-    transition: 0.2s;
+    transition: 0.15s;
+    color: #333;
+    text-decoration: none;
 }
 
 .btn-iniciar:hover {
     background: #d9ac3f;
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* CARD BRANCO */
+.btn-iniciar:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== CARD BRANCO ==================== */
 
 .card {
     background: #eeeeee;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-
     width: 90%;
     max-width: 500px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* TÍTULO DA TELA */
-
 .titulo-info {
     text-align: center;
-    font-size: clamp(22px, 3vw, 30px);
+    font-size: clamp(18px, 3vw, 26px);
     margin-bottom: 25px;
     color: #333;
+    font-weight: 700;
 }
 
-/* FORMULÁRIO */
+/* ==================== FORMULÁRIO ==================== */
 
-form {
+.form-group {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-/* LABEL */
-
 label {
     margin-top: 10px;
     margin-bottom: 5px;
     font-size: 16px;
+    font-weight: 600;
     color: #333;
 }
-
-/* INPUTS */
 
 input {
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid #999;
+    border: 2px solid #ccc;
     font-size: 16px;
     margin-bottom: 10px;
+    transition: border-color 0.2s;
+    font-family: "Montserrat", sans-serif;
 }
 
-/* BOTÃO */
+input:focus {
+    outline: none;
+    border-color: #2B885C;
+}
 
-form .btn-iniciar {
+.form-group .btn-iniciar {
     margin-top: 20px;
     align-self: center;
 }
 
-.pagina-info{
+/* ==================== FUNDO DA TELA INFO ==================== */
+
+.pagina-info {
     background-image: url("imagens/fundo.png");
     background-repeat: repeat;
     background-size: 1000px;
 }
 
-.pagina-info .container{
+.pagina-info .container {
     background: transparent;
 }
 
-.main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* ==================== TELA DO JOGO ==================== */
 
-.card-indice{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.pagina-jogo {
+    background: #f5f5f5;
+    min-height: 100vh;
     padding: 20px;
 }
 
-.card-indice h2{
-    font-size: 20px;
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 16px;
+}
+
+/* Barra de progresso */
+
+.card-indice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.card-indice h2 {
+    font-size: 16px;
     color: #F58442;
-    font-weight: semi-bold;
+    font-weight: 600;
 }
 
-.container-indice{
-    width: 573px;
+.container-indice {
+    width: 100%;
+    max-width: 573px;
     height: 28px;
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
+    border: 2px solid #ccc;
     border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
 }
 
-.indice{
-    background-color:#F58442;
-    width: 100px;
-    height: 26px;
-    border-radius: 8px;
-    border-color: #BA4500;
-    border-width: 1px;
-    border-style: solid;
+.indice {
+    background: #F58442;
+    height: 100%;
+    border-radius: 6px;
+    border-right: 2px solid #BA4500;
+    transition: width 0.4s ease;
 }
 
-.card-pergunta{
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px;
-    border-width: 2px;
-    border-color: #0000004D;
-    border-style: solid;
-    width: fit-content;
+/* Card pergunta */
+
+.card-pergunta {
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 2px solid rgba(0,0,0,0.15);
+    background: #fff;
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
 }
 
-.card-pergunta h2{
-    font-size: 20px;
-    color :#000000B3;
-    font-weight:500;
+.card-pergunta h2 {
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: 600;
+    line-height: 1.4;
 }
 
-.card-alternativa{
+/* Grid de alternativas */
+
+.card-alternativa {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-
+    gap: 12px;
+    width: 100%;
+    max-width: 680px;
 }
 
-.card-alternativa img{
-    width: 297px;
-    height: 165px;
-    padding: 10px 20px 10px 20px;
-}
-
-.btn-alternativaA{
+.btn-alternativa {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 36px;
+    padding: 12px;
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+    font-family: "Montserrat", sans-serif;
+    gap: 8px;
+}
+
+.btn-alternativa img {
+    width: 100%;
+    max-width: 240px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.btn-alternativa:hover:not(.disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 0 rgba(0,0,0,0.15);
+}
+
+.btn-alternativa:active:not(.disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+
+/* Cores de cada botão */
+
+.btn-A {
     background-color: #99b7f5;
-    border: none;
-    border-radius: 8px;
-    color: #2B885C;
-    font-weight: 500;
+    color: #1a3a7a;
 }
 
-.btn-alternativaB{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 36px;
+.btn-B {
     background-color: #F58442;
-    border: none;
-    border-radius: 8px;
-    color: #FCCA59;
-    font-weight: 500;
+    color: #7a2800;
 }
 
-.btn-alternativaC{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 36px;
-    background-color: #F296Bd;
-    border: none;
-    border-radius: 8px;
-    color: #FCCA59;
-    font-weight: 500;
+.btn-C {
+    background-color: #F296BD;
+    color: #7a1040;
 }
 
-.btn-alternativaD{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 36px;
+.btn-D {
     background-color: #FCCA59;
+    color: #7a5500;
+}
+
+/* Estados: correta / errada / bloqueada */
+
+.btn-alternativa.correta {
+    background-color: #4caf50 !important;
+    color: #fff !important;
+    box-shadow: 0 4px 0 #2e7d32 !important;
+}
+
+.btn-alternativa.errada {
+    background-color: #f44336 !important;
+    color: #fff !important;
+    box-shadow: 0 4px 0 #b71c1c !important;
+}
+
+.btn-alternativa.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+/* Feedback */
+
+.feedback {
+    width: 100%;
+    max-width: 680px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.feedback-acerto {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.feedback-erro {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+/* Botões de navegação */
+
+.card-botoes {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.btn-movimento {
+    background: #2B885C;
+    color: #fff;
     border: none;
-    border-radius: 8px;
-    color: #F58442;
-    font-weight: 500;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.15s;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    font-family: "Montserrat", sans-serif;
+}
+
+.btn-movimento:hover:not(:disabled) {
+    background: #236e4a;
+    transform: translateY(-2px);
+}
+
+.btn-movimento:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.btn-movimento:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-proximo {
+    background: #F58442;
+}
+
+.btn-proximo:hover:not(:disabled) {
+    background: #d96a28;
+}
+
+/* ==================== TELA DE RESULTADO ==================== */
+
+.card-resultado {
+    gap: 12px;
+    max-width: 460px;
+}
+
+.emoji-resultado {
+    font-size: 64px;
+    line-height: 1;
+}
+
+.placar {
+    background: #2B885C;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.mensagem-resultado {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.info-jogador {
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 12px 24px;
+    text-align: center;
+    font-size: 15px;
+    color: #444;
+    line-height: 1.8;
+    width: 100%;
+}
+
+.botoes-resultado {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.btn-secundario {
+    background: #888;
+}
+
+.btn-secundario:hover {
+    background: #666;
+}
+
+/* ==================== RESPONSIVO ==================== */
+
+@media (max-width: 500px) {
+    .card-alternativa {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .btn-alternativa img {
+        height: 90px;
+    }
+
+    .btn-alternativa {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .card-botoes {
+        gap: 8px;
+    }
+
+    .btn-movimento {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
 }

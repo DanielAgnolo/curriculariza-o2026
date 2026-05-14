@@ -1,40 +1,341 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Jogo</title>
-        <link rel="stylesheet" href="style.css">
-        <!-- Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BruQuiz - Jogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="main">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="pagina-jogo">
 
-            <div class="card-indice">
-                <div class ="container-indice">
-                    <div class="indice">
-                </div>
+    <div class="main">
 
+        <!-- Barra de progresso -->
+        <div class="card-indice">
+            <div class="container-indice">
+                <div class="indice" id="barra-progresso"></div>
             </div>
-            <h2>Pergunta 1 de 15</h2>
+            <h2 id="label-pergunta">Pergunta 1 de 15</h2>
         </div>
 
+        <!-- Pergunta -->
         <div class="card-pergunta">
-            <h2>Quem foi uma pessoa importante </br> para o crescimento de Brusque?</h2>
+            <h2 id="texto-pergunta">Carregando...</h2>
         </div>
 
-        <div class="card-alternativa">
-            <button class="btn-alternativaA"><img src="imagens/Albert-Einstein.jpg" alt="Albert Einstein"> Albert Einstein</button>
-            <button class="btn-alternativaB"><img src="imagens/Dom-Pedro.jpg" alt="Dom Pedro"> Alfredo Wolff</button>
-            <button class="btn-alternativaC"><img src="imagens/Carlos-Renaux.png" alt="Marie Curie">Carlos Renaux</button>
-            <button class="btn-alternativaD"><img src="imagens/Neymar.jpg" alt="Marie Curie"> Neymar</button>
+        <!-- Alternativas -->
+        <div class="card-alternativa" id="container-alternativas">
+            <button class="btn-alternativa btn-A" id="btn-0" onclick="responder(0)">
+                <img id="img-0" src="" alt="">
+                <span id="txt-0"></span>
+            </button>
+            <button class="btn-alternativa btn-B" id="btn-1" onclick="responder(1)">
+                <img id="img-1" src="" alt="">
+                <span id="txt-1"></span>
+            </button>
+            <button class="btn-alternativa btn-C" id="btn-2" onclick="responder(2)">
+                <img id="img-2" src="" alt="">
+                <span id="txt-2"></span>
+            </button>
+            <button class="btn-alternativa btn-D" id="btn-3" onclick="responder(3)">
+                <img id="img-3" src="" alt="">
+                <span id="txt-3"></span>
+            </button>
         </div>
 
-        <dib class="card-botoes">
-            <<button class="btn-movimento"><img src="imagens/Vector.png">Anterior</button>
-            <button class="btn-movimento">Próximo <img src="imagens/ep_arrow-up-bold.png"></button>
+        <!-- Feedback -->
+        <div class="feedback" id="feedback" style="display:none;"></div>
+
+        <!-- Botões de navegação -->
+        <div class="card-botoes">
+            <button class="btn-movimento" id="btn-anterior" onclick="anterior()">
+                ← Anterior
+            </button>
+            <button class="btn-movimento btn-proximo" id="btn-proximo" onclick="proximo()">
+                Próximo →
+            </button>
+        </div>
+
     </div>
+
+    <script>
+        const perguntas = [
+            {
+                pergunta: "Quem ajudou a começar a cidade de Brusque há muito tempo?",
+                alternativas: [
+                    { texto: "Piratas", correta: false, imagem: "imagens/Piratas.jpg" },
+                    { texto: "Imigrantes europeus", correta: true, imagem: "imagens/Imigrantes-Europeus.jpg" },
+                    { texto: "Astronautas", correta: false, imagem: "imagens/Astronauta.jpg" },
+                    { texto: "Vikings", correta: false, imagem: "imagens/Vikings.jpg" }
+                ]
+            },
+            {
+                pergunta: "De qual país vieram muitos imigrantes que ajudaram a formar Brusque?",
+                alternativas: [
+                    { texto: "Alemanha", correta: true, imagem: "imagens/Alemanha.jpg" },
+                    { texto: "México", correta: false, imagem: "imagens/Mexico.jpg" },
+                    { texto: "Índia", correta: false, imagem: "imagens/India.jpg" },
+                    { texto: "Austrália", correta: false, imagem: "imagens/Australia.jpg" }
+                ]
+            },
+            {
+                pergunta: "O que ajudou Brusque a crescer e ficar conhecida no passado?",
+                alternativas: [
+                    { texto: "Fábricas de roupas e tecidos", correta: true, imagem: "imagens/Roupas-tecidos.jpg" },
+                    { texto: "Fábricas de foguetes", correta: false, imagem: "imagens/Fabrica-de-foguetes.jpg" },
+                    { texto: "Fábricas de navios", correta: false, imagem: "imagens/Fabrica-de-navios.jpg" },
+                    { texto: "Fábricas de celulares", correta: false, imagem: "imagens/Fabrica-de-celular.jpg" }
+                ]
+            },
+            {
+                pergunta: "Quem foi uma pessoa importante para o crescimento de Brusque?",
+                alternativas: [
+                    { texto: "Carlos Renaux", correta: true, imagem: "imagens/Carlos-Renaux.png" },
+                    { texto: "Dom Pedro", correta: false, imagem: "imagens/Dom-Pedro.jpg" },
+                    { texto: "Albert Einstein", correta: false, imagem: "imagens/Albert-Einstein.jpg" },
+                    { texto: "Neymar", correta: false, imagem: "imagens/Neymar.jpg" }
+                ]
+            },
+            {
+                pergunta: "A fábrica de Carlos Renaux fazia principalmente:",
+                alternativas: [
+                    { texto: "Roupas e tecidos", correta: true, imagem: "imagens/Roupas-tecidos.jpg" },
+                    { texto: "Aviões", correta: false, imagem: "imagens/aviao.jpg" },
+                    { texto: "Bicicletas", correta: false, imagem: "imagens/bicicleta.jpg" },
+                    { texto: "Brinquedos", correta: false, imagem: "imagens/brinquedo.jpg" }
+                ]
+            },
+            {
+                pergunta: "Onde tem muitos animais em Brusque?",
+                alternativas: [
+                    { texto: "Parque Zoobotânico", correta: true, imagem: "imagens/Parque Zoobotânico de Brusque alegre.png" },
+                    { texto: "Escola", correta: false, imagem: "imagens/Escola.png" },
+                    { texto: "Casa", correta: false, imagem: "imagens/Casa.png" },
+                    { texto: "Mercado", correta: false, imagem: "imagens/Mercado.png" }
+                ]
+            },
+            {
+                pergunta: "Quem veio morar em Brusque?",
+                alternativas: [
+                    { texto: "Alemães", correta: true, imagem: "imagens/Alemaes indo morar em brusque.png" },
+                    { texto: "Robô", correta: false, imagem: "imagens/Robo.png" },
+                    { texto: "Dinossauro", correta: false, imagem: "imagens/Dinossauro.png" },
+                    { texto: "Alien", correta: false, imagem: "imagens/aliens.jpg" }
+                ]
+            },
+            {
+                pergunta: "Qual é a famosa festa do marreco em Brusque?",
+                alternativas: [
+                    { texto: "Fenarreco", correta: true, imagem: "imagens/Fenarreco.png" },
+                    { texto: "Natal", correta: false, imagem: "imagens/Natal.png" },
+                    { texto: "Halloween", correta: false, imagem: "imagens/halloween.jpg" },
+                    { texto: "Páscoa", correta: false, imagem: "imagens/pascoa.jpg" }
+                ]
+            },
+            {
+                pergunta: "O que é o marreco?",
+                alternativas: [
+                    { texto: "Um pato/marreco", correta: true, imagem: "imagens/marreco.png" },
+                    { texto: "Galinha", correta: false, imagem: "imagens/Galinha.png" },
+                    { texto: "Porco", correta: false, imagem: "imagens/Porco.png" },
+                    { texto: "Peixe", correta: false, imagem: "imagens/Peixe.png" }
+                ]
+            },
+            {
+                pergunta: "O que acontece no aniversário da cidade?",
+                alternativas: [
+                    { texto: "Festa", correta: true, imagem: "imagens/festa.jpg" },
+                    { texto: "Halloween", correta: false, imagem: "imagens/halloween.jpg" },
+                    { texto: "Natal", correta: false, imagem: "imagens/Natal.png" },
+                    { texto: "Páscoa", correta: false, imagem: "imagens/pascoa.jpg" }
+                ]
+            },
+            {
+                pergunta: "Em Brusque as pessoas podem brincar em…",
+                alternativas: [
+                    { texto: "Parques", correta: true, imagem: "imagens/parque.jpg" },
+                    { texto: "Vulcões", correta: false, imagem: "imagens/vulcões.jpg" },
+                    { texto: "Desertos", correta: false, imagem: "imagens/desertos.jpg" },
+                    { texto: "Pirâmides", correta: false, imagem: "imagens/pirâmides.jpg" }
+                ]
+            },
+            {
+                pergunta: "Onde as pessoas vão quando estão doentes em Brusque?",
+                alternativas: [
+                    { texto: "Hospital Azambuja", correta: true, imagem: "imagens/Hospital azambuja.jpeg" },
+                    { texto: "Padaria", correta: false, imagem: "imagens/padaria.jpg" },
+                    { texto: "Cinema", correta: false, imagem: "imagens/cinema.jpg" },
+                    { texto: "Parque", correta: false, imagem: "imagens/parque.jpg" }
+                ]
+            },
+            {
+                pergunta: "Onde muitas pessoas vão comprar roupas em Brusque?",
+                alternativas: [
+                    { texto: "Lojas do centro", correta: true, imagem: "imagens/Centrobq.png" },
+                    { texto: "Hospital", correta: false, imagem: "imagens/Hospital azambuja.jpeg" },
+                    { texto: "Escola", correta: false, imagem: "imagens/Escola.png" },
+                    { texto: "Igreja", correta: false, imagem: "imagens/igreja.jpg" }
+                ]
+            },
+            {
+                pergunta: "Onde fica a Prefeitura de Brusque?",
+                alternativas: [
+                    { texto: "Praça da Prefeitura", correta: true, imagem: "imagens/Prefeitura.jpg" },
+                    { texto: "Praia", correta: false, imagem: "imagens/praia.jpg" },
+                    { texto: "Floresta", correta: false, imagem: "imagens/floresta.jpg" },
+                    { texto: "Montanha", correta: false, imagem: "imagens/montanha.jpg" }
+                ]
+            },
+            {
+                pergunta: "Qual é o time de futebol da cidade de Brusque?",
+                alternativas: [
+                    { texto: "Brusque FC", correta: true, imagem: "imagens/escudo brusque.png" },
+                    { texto: "Flamengo", correta: false, imagem: "imagens/flamengo.jpg" },
+                    { texto: "Barcelona", correta: false, imagem: "imagens/barcelona.jpg" },
+                    { texto: "Real Madrid", correta: false, imagem: "imagens/real madrid.jpg" }
+                ]
+            }
+        ];
+
+        let perguntaAtual = 0;
+        let acertos = 0;
+        let respostas = new Array(perguntas.length).fill(null); // null = não respondida, true/false = resultado
+
+        function carregarPergunta() {
+            const p = perguntas[perguntaAtual];
+            const total = perguntas.length;
+
+            // Atualiza label e barra
+            document.getElementById("label-pergunta").textContent = `Pergunta ${perguntaAtual + 1} de ${total}`;
+            const larguraBarra = ((perguntaAtual + 1) / total) * 100;
+            document.getElementById("barra-progresso").style.width = larguraBarra + "%";
+
+            // Atualiza pergunta
+            document.getElementById("texto-pergunta").textContent = p.pergunta;
+
+            // Atualiza alternativas
+            for (let i = 0; i < 4; i++) {
+                const alt = p.alternativas[i];
+                const btn = document.getElementById("btn-" + i);
+                const img = document.getElementById("img-" + i);
+                const txt = document.getElementById("txt-" + i);
+
+                img.src = alt.imagem;
+                img.alt = alt.texto;
+                txt.textContent = alt.texto;
+
+                // Reseta classes de estado
+                btn.classList.remove("correta", "errada", "disabled");
+                btn.disabled = false;
+            }
+
+            // Esconde feedback
+            const feedback = document.getElementById("feedback");
+            feedback.style.display = "none";
+            feedback.className = "feedback";
+
+            // Se já respondeu essa pergunta, mostra o estado anterior
+            if (respostas[perguntaAtual] !== null) {
+                mostrarEstadoRespondido();
+            }
+
+            // Botão anterior: desabilitado na primeira
+            document.getElementById("btn-anterior").disabled = perguntaAtual === 0;
+
+            // Botão próximo: muda texto na última
+            const btnProx = document.getElementById("btn-proximo");
+            if (perguntaAtual === total - 1) {
+                btnProx.textContent = "Ver Resultado →";
+            } else {
+                btnProx.textContent = "Próximo →";
+            }
+        }
+
+        function responder(indice) {
+            // Ignora se já respondeu
+            if (respostas[perguntaAtual] !== null) return;
+
+            const p = perguntas[perguntaAtual];
+            const escolha = p.alternativas[indice];
+            const correta = escolha.correta;
+
+            respostas[perguntaAtual] = correta;
+            if (correta) acertos++;
+
+            // Bloqueia todos os botões e colore
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById("btn-" + i);
+                btn.disabled = true;
+                btn.classList.add("disabled");
+                if (p.alternativas[i].correta) {
+                    btn.classList.add("correta");
+                } else if (i === indice && !correta) {
+                    btn.classList.add("errada");
+                }
+            }
+
+            // Mostra feedback
+            const feedback = document.getElementById("feedback");
+            feedback.style.display = "block";
+            if (correta) {
+                feedback.className = "feedback feedback-acerto";
+                feedback.textContent = "✅ Correto! Muito bem!";
+            } else {
+                const textoCorreto = p.alternativas.find(a => a.correta).texto;
+                feedback.className = "feedback feedback-erro";
+                feedback.textContent = `❌ Errou! A resposta certa era: ${textoCorreto}`;
+            }
+        }
+
+        function mostrarEstadoRespondido() {
+            const p = perguntas[perguntaAtual];
+            const acertou = respostas[perguntaAtual];
+
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById("btn-" + i);
+                btn.disabled = true;
+                btn.classList.add("disabled");
+                if (p.alternativas[i].correta) {
+                    btn.classList.add("correta");
+                }
+            }
+
+            const feedback = document.getElementById("feedback");
+            feedback.style.display = "block";
+            if (acertou) {
+                feedback.className = "feedback feedback-acerto";
+                feedback.textContent = "✅ Correto! Muito bem!";
+            } else {
+                const textoCorreto = p.alternativas.find(a => a.correta).texto;
+                feedback.className = "feedback feedback-erro";
+                feedback.textContent = `❌ Errou! A resposta certa era: ${textoCorreto}`;
+            }
+        }
+
+        function proximo() {
+            if (perguntaAtual < perguntas.length - 1) {
+                perguntaAtual++;
+                carregarPergunta();
+            } else {
+                // Salva resultado e vai para tela final
+                localStorage.setItem("acertos", acertos);
+                localStorage.setItem("total", perguntas.length);
+                window.location.href = "resultado.html";
+            }
+        }
+
+        function anterior() {
+            if (perguntaAtual > 0) {
+                perguntaAtual--;
+                carregarPergunta();
+            }
+        }
+
+        // Inicia
+        carregarPergunta();
+    </script>
+</body>
 </html>
